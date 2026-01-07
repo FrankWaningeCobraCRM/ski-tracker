@@ -1,0 +1,255 @@
+/* ===========================
+   GENERAL STYLING
+   =========================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #e3f2fd;
+}
+
+h1 {
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* ===========================
+   LAYOUT - MAIN STRUCTURE
+   =========================== */
+
+.main-content {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.map-container {
+    flex: 1;
+    min-width: 300px;
+}
+
+
+/* ===========================
+   THE MAP
+   =========================== */
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+    border: 3px solid #1565c0;
+}
+
+
+/* ===========================
+   SIDEBAR WITH RESORT LIST
+   =========================== */
+
+.sidebar {
+    width: 300px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    color: #1565c0;
+    border-bottom: 2px solid #e3f2fd;
+    padding-bottom: 10px;
+}
+
+/* Statistics box */
+.stats {
+    background-color: #e8f5e9;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.stats .number {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+/* The list with ski resorts */
+.resort-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.resort-list li {
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.resort-list li:hover {
+    background-color: #f5f5f5;
+}
+
+.resort-list li.visited {
+    background-color: #e8f5e9;
+}
+
+/* Checkbox in the list */
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.resort-list li.visited .checkbox {
+    background-color: #4caf50;
+    border-color: #4caf50;
+    color: white;
+}
+
+/* Reset button */
+.reset-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.reset-button:hover {
+    background-color: #d32f2f;
+}
+
+
+/* ===========================
+   LEGEND
+   =========================== */
+
+.legend {
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.legend h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #1565c0;
+}
+
+.legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.square {
+    width: 18px;
+    height: 12px;
+    border-radius: 2px;
+    opacity: 0.6;
+}
+
+.visited-color { 
+    background-color: #4caf50; 
+}
+
+.not-visited-color { 
+    background-color: #2196f3; 
+}
+
+
+/* ===========================
+   TIP BOX
+   =========================== */
+
+.tip {
+    background-color: #fff3e0;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+
+/* ===========================
+   POPUP STYLING
+   =========================== */
+
+.popup-content {
+    text-align: center;
+}
+
+.popup-content h4 {
+    margin: 0 0 5px 0;
+}
+
+.popup-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.popup-button:hover {
+    background-color: #388e3c;
+}
+
+.popup-button.not-visited {
+    background-color: #2196f3;
+}
+
+.popup-button.not-visited:hover {
+    background-color: #1976d2;
+}

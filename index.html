@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Ski Tracker</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Our own CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>🎿 Mijn Ski Tracker</h1>
+        <p class="subtitle">Klik op een marker of in de lijst om een skigebied als bezocht te markeren!</p>
+        
+        <div class="main-content">
+            <!-- The map -->
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+            
+            <!-- Sidebar with list -->
+            <div class="sidebar">
+                <h3>📋 Mijn Skigebieden</h3>
+                
+                <div class="stats">
+                    <div class="number" id="visited-count">0</div>
+                    <div>van <span id="total-resorts">0</span> bezocht</div>
+                </div>
+                
+                <ul class="resort-list" id="resort-list">
+                    <!-- Automatically filled by JavaScript -->
+                </ul>
+                
+                <button class="reset-button" onclick="resetAll()">🗑️ Reset alles</button>
+            </div>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <h3>Legenda</h3>
+            
+            <p><b>Markers:</b></p>
+            <div class="legend-row">
+                <div class="legend-item">
+                    <div class="dot visited-color"></div>
+                    <span>Bezocht</span>
+                </div>
+                <div class="legend-item">
+                    <div class="dot not-visited-color"></div>
+                    <span>Nog niet bezocht</span>
+                </div>
+            </div>
+            
+            <p><b>Skiregio's:</b></p>
+            <div class="legend-row" id="region-legend"></div>
+        </div>
+        
+        <!-- Tip -->
+        <div class="tip">
+            💡 <b>Tip:</b> Klik op een marker op de kaart óf op een skigebied in de lijst om het als bezocht te markeren. Je voortgang wordt automatisch opgeslagen!
+        </div>
+    </div>
+    
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Our own JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
