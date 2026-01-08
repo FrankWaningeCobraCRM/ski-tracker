@@ -24,7 +24,7 @@ h1 {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -41,7 +41,7 @@ h1 {
 
 .map-container {
     flex: 1;
-    min-width: 300px;
+    min-width: 400px;
 }
 
 
@@ -58,11 +58,181 @@ h1 {
 
 
 /* ===========================
+   TIMELINE (LEFT SIDE)
+   =========================== */
+
+.timeline-container {
+    width: 320px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-container h3 {
+    margin-top: 0;
+    color: #1565c0;
+    border-bottom: 2px solid #e3f2fd;
+    padding-bottom: 10px;
+}
+
+.timeline-stats {
+    background-color: #e8f5e9;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.timeline-stats span {
+    font-weight: bold;
+    color: #4caf50;
+    font-size: 18px;
+}
+
+.timeline {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.no-visits-yet {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+.timeline-year {
+    background-color: #1565c0;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.timeline-year:first-child {
+    margin-top: 0;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 0;
+    bottom: -15px;
+    width: 2px;
+    background-color: #e0e0e0;
+}
+
+.timeline-item:last-child::before {
+    display: none;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #4caf50;
+}
+
+.timeline-item-content {
+    background-color: #f5f5f5;
+    padding: 10px 12px;
+    border-radius: 8px;
+    flex: 1;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.timeline-item-content:hover {
+    background-color: #e8f5e9;
+    transform: translateX(3px);
+}
+
+.timeline-item-date {
+    font-size: 12px;
+    color: #1565c0;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.timeline-item-resort {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+.timeline-item-region {
+    font-size: 11px;
+    color: #888;
+    margin-top: 2px;
+}
+
+.timeline-item-companions {
+    font-size: 11px;
+    color: #666;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px dashed #ddd;
+}
+
+.timeline-item-companions::before {
+    content: '👥 ';
+}
+
+.timeline-item-accommodation {
+    font-size: 11px;
+    color: #666;
+    margin-top: 3px;
+}
+
+.timeline-item-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px dashed #ddd;
+}
+
+.timeline-item-rating .avg-stars {
+    color: #ffc107;
+    font-size: 12px;
+}
+
+.timeline-item-rating .avg-score {
+    font-size: 11px;
+    color: #666;
+    font-weight: bold;
+}
+
+
+/* ===========================
    SIDEBAR WITH RESORT LIST
    =========================== */
 
 .sidebar {
-    width: 300px;
+    width: 250px;
     background-color: white;
     border-radius: 10px;
     padding: 15px;
@@ -77,22 +247,33 @@ h1 {
     padding-bottom: 10px;
 }
 
-/* Statistics box */
 .stats {
     background-color: #e8f5e9;
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 15px;
+}
+
+.stats-row {
+    display: flex;
+    gap: 10px;
+}
+
+.stat-box {
+    flex: 1;
     text-align: center;
 }
 
 .stats .number {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
     color: #4caf50;
 }
 
-/* The list with ski resorts */
+.stat-box div:last-child {
+    font-size: 12px;
+}
+
 .resort-list {
     list-style: none;
     padding: 0;
@@ -118,25 +299,29 @@ h1 {
     background-color: #e8f5e9;
 }
 
-/* Checkbox in the list */
-.checkbox {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.resort-list li.visited .checkbox {
+.visit-badge {
     background-color: #4caf50;
-    border-color: #4caf50;
     color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 24px;
+    text-align: center;
 }
 
-/* Reset button */
+.visit-badge.empty {
+    background-color: #ccc;
+}
+
+.resort-list li div:last-child {
+    font-size: 13px;
+}
+
+.resort-list li small {
+    font-size: 11px;
+}
+
 .reset-button {
     background-color: #f44336;
     color: white;
@@ -146,6 +331,7 @@ h1 {
     cursor: pointer;
     margin-top: 10px;
     width: 100%;
+    font-size: 13px;
 }
 
 .reset-button:hover {
@@ -185,24 +371,24 @@ h1 {
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
 .square {
-    width: 18px;
-    height: 12px;
-    border-radius: 2px;
-    opacity: 0.6;
+    width: 20px;
+    height: 14px;
+    border-radius: 7px;
+    opacity: 0.7;
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
-.visited-color { 
-    background-color: #4caf50; 
-}
-
-.not-visited-color { 
-    background-color: #2196f3; 
+.visited-color { background-color: #4caf50; }
+.region-colors { 
+    background: linear-gradient(135deg, #e91e63 0%, #9c27b0 25%, #ff9800 50%, #00bcd4 75%, #8bc34a 100%); 
 }
 
 
@@ -220,36 +406,602 @@ h1 {
 
 
 /* ===========================
-   POPUP STYLING
+   MODAL
+   =========================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #1565c0;
+    padding-right: 30px;
+}
+
+.modal-content #modal-region {
+    color: #666;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+
+/* ===========================
+   ADD VISIT FORM
+   =========================== */
+
+.add-visit-section {
+    background-color: #e3f2fd;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.add-visit-section h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1565c0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.sub-label {
+    font-size: 13px !important;
+    color: #555 !important;
+    font-weight: normal !important;
+}
+
+.date-range {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.date-input {
+    flex: 1;
+    min-width: 140px;
+}
+
+.date-input span {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.date-input input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #1565c0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #1565c0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="url"]::placeholder {
+    color: #aaa;
+}
+
+.add-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.add-button:hover {
+    background-color: #388e3c;
+}
+
+
+/* ===========================
+   STAR RATING SYSTEM
+   =========================== */
+
+.ratings-section,
+.accommodation-section,
+.notes-section {
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+}
+
+.ratings-section > label,
+.accommodation-section > label,
+.notes-section > label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #1565c0;
+    font-size: 15px;
+}
+
+.rating-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.rating-row:last-child {
+    border-bottom: none;
+}
+
+.rating-label {
+    font-size: 13px;
+    color: #555;
+    flex: 1;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 2px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    cursor: pointer;
+    font-size: 22px;
+    color: #ddd;
+    transition: color 0.2s;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+    color: #ffc107;
+}
+
+
+/* ===========================
+   ACCOMMODATION TYPE SELECTOR
+   =========================== */
+
+.accommodation-type-selector {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.accommodation-option {
+    flex: 1;
+    min-width: 100px;
+}
+
+.accommodation-option input {
+    display: none;
+}
+
+.option-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: white;
+}
+
+.option-card:hover {
+    border-color: #1565c0;
+    background-color: #f5f9ff;
+}
+
+.accommodation-option input:checked + .option-card {
+    border-color: #1565c0;
+    background-color: #e3f2fd;
+    box-shadow: 0 2px 8px rgba(21, 101, 192, 0.2);
+}
+
+.option-icon {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.option-text {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+}
+
+
+/* ===========================
+   RICH TEXT EDITOR
+   =========================== */
+
+.editor-toolbar {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.editor-toolbar button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ccc;
+    background-color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.editor-toolbar button:hover {
+    background-color: #e3f2fd;
+    border-color: #1565c0;
+}
+
+.rich-text-editor {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 2px solid #1565c0;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    background-color: white;
+    overflow-y: auto;
+}
+
+.rich-text-editor:focus {
+    outline: none;
+    border-color: #0d47a1;
+    box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.1);
+}
+
+.rich-text-editor:empty:before {
+    content: attr(data-placeholder);
+    color: #aaa;
+}
+
+.editor-hint {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+
+/* ===========================
+   VISIT HISTORY
+   =========================== */
+
+.visit-history h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#visit-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#visit-list li {
+    padding: 15px;
+    background-color: #f5f5f5;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    position: relative;
+}
+
+#visit-list li .visit-date-range {
+    font-weight: bold;
+    color: #1565c0;
+    font-size: 14px;
+}
+
+#visit-list li .visit-duration {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+}
+
+#visit-list li .visit-companions {
+    font-size: 13px;
+    color: #333;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #ddd;
+}
+
+#visit-list li .visit-companions::before {
+    content: '👥 ';
+}
+
+#visit-list li .visit-ratings {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #ddd;
+}
+
+#visit-list li .visit-ratings-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+#visit-list li .visit-rating-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding: 2px 0;
+}
+
+#visit-list li .visit-rating-item .rating-name {
+    color: #666;
+}
+
+#visit-list li .visit-rating-item .rating-stars {
+    color: #ffc107;
+}
+
+#visit-list li .visit-avg-rating {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#visit-list li .visit-avg-rating .avg-label {
+    color: #333;
+}
+
+#visit-list li .visit-avg-rating .avg-value {
+    color: #ffc107;
+}
+
+#visit-list li .visit-accommodation {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #ddd;
+}
+
+#visit-list li .visit-accommodation-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+#visit-list li .visit-accommodation-type {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+#visit-list li .visit-accommodation-link {
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+#visit-list li .visit-accommodation-link a {
+    color: #1565c0;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+#visit-list li .visit-accommodation-link a:hover {
+    text-decoration: underline;
+}
+
+#visit-list li .visit-notes {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #ddd;
+}
+
+#visit-list li .visit-notes-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+#visit-list li .visit-notes-content {
+    font-size: 13px;
+    color: #333;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    line-height: 1.5;
+}
+
+#visit-list li .delete-visit {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+#visit-list li .delete-visit:hover {
+    background-color: #d32f2f;
+}
+
+#no-visits-message {
+    color: #999;
+    font-style: italic;
+}
+
+
+/* ===========================
+   MAP POPUP
    =========================== */
 
 .popup-content {
     text-align: center;
+    min-width: 200px;
 }
 
 .popup-content h4 {
     margin: 0 0 5px 0;
+    color: #1565c0;
+}
+
+.popup-content .popup-region {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.popup-content .popup-piste-km {
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.popup-visits {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.popup-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .popup-button {
-    background-color: #4caf50;
+    background-color: #1565c0;
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 10px;
     width: 100%;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.2s;
 }
 
 .popup-button:hover {
-    background-color: #388e3c;
+    background-color: #0d47a1;
 }
 
-.popup-button.not-visited {
-    background-color: #2196f3;
+.popup-button.ski-map-button {
+    background-color: #ff5722;
 }
 
-.popup-button.not-visited:hover {
-    background-color: #1976d2;
+.popup-button.ski-map-button:hover {
+    background-color: #e64a19;
 }
+
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 1100px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .timeline-container,
+    .sidebar {
+        width: 100%;
+        max-height: 300px;
+    }
+    
+    .map-container {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .accommodation-type-selector {
+        flex-direction: column;
+    }
+    
+    .accommodation-option {
+        min-width: 100%;
+    }
+}
+
+/* ===========================
+   LOGO
