@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mijn Ski Tracker</title>
+    <title>Ski Tracker - F&B</title>
     
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -12,9 +12,85 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>🎿 Mijn Ski Tracker</h1>
-        <p class="subtitle">Klik op een marker of in de lijst om je bezoeken te registreren!</p>
+    <!-- Auth Container (Login/Register) -->
+    <div id="auth-container" class="auth-container">
+        <div class="auth-box">
+            <img src="logo.png" alt="Ski Tracker F&B" class="auth-logo" />
+            <h1>Ski Tracker</h1>
+            <p class="auth-subtitle">Log in of maak een account aan</p>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label>📧 E-mail</label>
+                    <input type="email" id="login-email" required placeholder="jouw@email.com" />
+                </div>
+                <div class="form-group">
+                    <label>🔒 Wachtwoord</label>
+                    <input type="password" id="login-password" required placeholder="••••••••" />
+                </div>
+                <button type="submit" class="auth-button">Inloggen</button>
+                <p class="auth-error" id="login-error"></p>
+            </form>
+            
+            <!-- Register Form (hidden by default) -->
+            <form id="register-form" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label>👤 Naam</label>
+                    <input type="text" id="register-name" required placeholder="Je naam" />
+                </div>
+                <div class="form-group">
+                    <label>📧 E-mail</label>
+                    <input type="email" id="register-email" required placeholder="jouw@email.com" />
+                </div>
+                <div class="form-group">
+                    <label>🔒 Wachtwoord</label>
+                    <input type="password" id="register-password" required placeholder="Minimaal 6 tekens" minlength="6" />
+                </div>
+                <div class="form-group">
+                    <label>🔒 Bevestig wachtwoord</label>
+                    <input type="password" id="register-password-confirm" required placeholder="••••••••" />
+                </div>
+                <button type="submit" class="auth-button">Account aanmaken</button>
+                <p class="auth-error" id="register-error"></p>
+            </form>
+            
+            <div class="auth-switch">
+                <p id="switch-to-register">Nog geen account? <a href="#" onclick="showRegisterForm()">Registreren</a></p>
+                <p id="switch-to-login" style="display: none;">Heb je al een account? <a href="#" onclick="showLoginForm()">Inloggen</a></p>
+            </div>
+            
+            <div class="auth-divider">
+                <span>of</span>
+            </div>
+            
+            <button onclick="signInWithGoogle()" class="google-button">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" />
+                Inloggen met Google
+            </button>
+        </div>
+    </div>
+    
+    <!-- Main App Container (hidden until logged in) -->
+    <div id="app-container" class="container" style="display: none;">
+        <!-- Header with title, user info and logo -->
+        <header class="site-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>🎿 Mijn Ski Tracker</h1>
+                    <p class="subtitle">Klik op een marker of in de lijst om je bezoeken te registreren!</p>
+                </div>
+                <div class="header-center">
+                    <div class="user-info">
+                        <span id="user-display-name">Gebruiker</span>
+                        <button onclick="handleLogout()" class="logout-button">Uitloggen</button>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <img src="logo.png" alt="Ski Tracker F&B" class="site-logo" />
+                </div>
+            </div>
+        </header>
         
         <div class="main-content">
             <!-- Timeline on the left -->
@@ -69,7 +145,6 @@
         <div class="tip">
             💡 <b>Tip:</b> Klik op een marker om de pistekaart te bekijken, bezoeken toe te voegen met beoordelingen en accommodatie info!
         </div>
-        
     </div>
     
     <!-- Visit Modal -->
@@ -235,7 +310,25 @@
                     <p class="editor-hint">Schrijf hier je ervaringen, tips en opmerkingen...</p>
                 </div>
                 
-                <button onclick="addVisit()" class="add-button">Bezoek toevoegen</button>
+                <!-- Photos Section -->
+                <div class="photos-section">
+                    <label>📷 Foto's</label>
+                    <div class="photo-upload-area" id="photo-upload-area">
+                        <input type="file" id="photo-input" accept="image/*" multiple onchange="handlePhotoUpload(event)" />
+                        <label for="photo-input" class="photo-upload-label">
+                            <span class="upload-icon">📁</span>
+                            <span>Klik om foto's te selecteren</span>
+                            <span class="upload-hint">of sleep ze hierheen</span>
+                        </label>
+                    </div>
+                    <div class="photo-preview-container" id="photo-preview-container"></div>
+                    <p class="photo-hint">Max 5 foto's per bezoek. Foto's worden lokaal opgeslagen.</p>
+                </div>
+                
+                <div class="form-buttons">
+                    <button onclick="saveVisit()" class="add-button" id="save-visit-button">Bezoek toevoegen</button>
+                    <button onclick="cancelEdit()" class="cancel-button" id="cancel-edit-button" style="display: none;">Annuleren</button>
+                </div>
             </div>
             
             <div class="visit-history">
@@ -246,10 +339,23 @@
         </div>
     </div>
     
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Laden...</p>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
     <!-- Leaflet JavaScript -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
     <!-- Our JavaScript -->
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
